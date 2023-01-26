@@ -18,16 +18,6 @@ class DefaultController extends AbstractController
         } else{
             $page = 1;
         }
-        // for ($i = 1; $i < 53; $i++){
-        //     $users[] = [
-        //         'id' => $i,
-        //         'name' => "name$i",
-        //         'email' => "email$i@gmail.com",
-        //         'phone' => 123456789,
-        //         'type' => "type$i",
-        //         'status' => $i % 2 == 0
-        //     ];
-        // }
 
         $db = new \DatabaseConnection();
         $users = $db->getEntries($page);

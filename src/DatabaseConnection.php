@@ -62,12 +62,16 @@ class DatabaseConnection
         $stmt->execute();
     }
 
-    public function updateEntry($id, $data)
+    public function updateEntry($id, Entry $entry)
     {
+        $name = $entry->getName();
+        $email = $entry->getEmail();
+        $tlf = $entry->getTlf();
+        $cat = $entry->getCat();
+        $is_active = $entry->getActive() ? 1 : 0;
         $sql = "UPDATE Providers SET name = ?, email = ?, tlf = ?, cat = ?, is_active = ?, last_modified = NOW() WHERE id = ?";
         $stmt = $this->connection->prepare($sql);
-        $is_active = $data["active"] ? 1 : 0;
-        $stmt->bind_param("sssssi", $data["name"], $data["email"], $data["tlf"], $data["type"], $is_active, $id);
+        $stmt->bind_param("sssssi", $name, $email, $tlf, $cat, $is_active, $id);
         $stmt->execute();
     }
 

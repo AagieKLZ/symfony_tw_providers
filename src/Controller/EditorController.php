@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Entry;
 
 class EditorController extends AbstractController
 {
@@ -19,28 +20,18 @@ class EditorController extends AbstractController
      */
     public function editEntry(Request $request)
     {
-        // for ($i = 1; $i < 53; $i++){
-        //     $users[] = [
-        //         'id' => $i,
-        //         'name' => "name$i",
-        //         'email' => "email$i@gmail.com",
-        //         'phone' => 123456789,
-        //         'type' => "type$i",
-        //         'status' => $i % 2 == 0
-        //     ];
-        // }
         if (isset($_GET['id'])){
             $id = $_GET['id'];
             // $filtered = array_filter($users, [$this, 'filter_results']);
             $db = new \DatabaseConnection();
             $user = $db->getEntry($id);
-
+            $entry = new Entry();
             if ($user){
-                $form = $this->createFormBuilder()
+                $form = $this->createFormBuilder($entry)
                     ->add('name', TextType::class, ['label' => 'Nombre', 'data' => $user['name']])
                     ->add('email', EmailType::class, ['label' => 'Correo Electrónico', 'data' => $user['email']])
                     ->add('tlf', TelType::class, ['label' => 'Teléfono', 'data' => $user['tlf']])
-                    ->add('type', ChoiceType::class, ['choices' => ['Hotel' => 'Hotel', 'Pista' => 'Pista', 'Complemento' => 'Complemento'], 'label' => 'Categoría', 'data' => $user["cat"]])
+                    ->add('cat', ChoiceType::class, ['choices' => ['Hotel' => 'Hotel', 'Pista' => 'Pista', 'Complemento' => 'Complemento'], 'label' => 'Categoría', 'data' => $user["cat"]])
                     ->add('active', CheckboxType::class, ['label' => 'Proveedor activo', 'data' => $user["is_active"] == 1, 'required' => false])
                     ->add('submit', SubmitType::class, ['label' => 'Añadir'])
                     ->getForm();
