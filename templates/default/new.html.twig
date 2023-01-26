@@ -5,4 +5,27 @@
 <div class="w-full h-56 bg-blue-500 absolute">
     <h1 class="text-white text-6xl font-bold p-8">Nuevo Proveedor</h1>
     </div>
+<div class="absolute top-64 w-full">
+<div class="md:w-1/2 w-2/3 mx-auto">
+{{ form_start(form, {'attr' : {'class' : "form-simple form-underline"}}) }}
+<fieldset class="border-[1px] border-black p-4 mb-4">
+<legend>Datos</legend>
+    {{ form_label(form.name)}}
+    {{ form_widget(form.name) }} 
+    {{ form_label(form.email)}}
+    {{ form_widget(form.email) }}
+    {{ form_label(form.tlf) }}
+    {{ form_widget(form.tlf) }}
+    {{ form_label(form.type)}}
+    {{ form_widget(form.type)}}
+    <div class="flex flex-row mt-4 items-center">
+    {{form_widget(form.active, {'attr' : {'id' : 'active-checkbox'}})}}
+    {{ form_label(form.active, 'Active', {'label_attr' : {'for' : 'active-checkbox'}})}}
+    </div>
+    {# {{ form_row (form.active, {'attr' : {'class' : 'mt-2'}})}} #}
+    </fieldset>
+    {{ form_widget(form.submit, {'attr' : {'class' : "bg-blue-500 text-white px-3 py-2 rounded"}}) }}
+{{ form_end(form) }}
+</div>
+</div>
 {% endblock %}

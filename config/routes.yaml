@@ -6,6 +6,6 @@ edit:
     controller: App\Controller\EditorController::editEntry
 new:
     path: /new
-    controller: App\Controller\NewEntryController::newEntry
+    controller: App\Controller\NewEntryController::createNewForm
 
     
