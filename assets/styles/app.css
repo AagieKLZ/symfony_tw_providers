@@ -6,6 +6,16 @@
     display: none;
 }
 
-tr.active > td{
+tr.active:nth-child(2n) > td{
     background-color: pink;
+}
+
+tr.active:nth-child(2n+1) > td{
+    background-color: rgb(248, 206, 213);
+}
+
+.dotted{
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    text-decoration-color: black;
 }

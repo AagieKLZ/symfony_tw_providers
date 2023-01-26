@@ -14,7 +14,7 @@
     
     <table class="table border-2 border-black mx-auto w-[90%] border-collapse">
         <thead>
-            <tr class="bg-gray-100">
+            <tr class="bg-blue-700 text-white">
                 <th class="py-4 border-2 border-black"><input type="checkbox" id="checkall" class="checkbox" onClick="toggle(this)" /></th>
                 <th class="py-4 border-2 border-black">#</th>
                 <th class="py-4 border-2 border-black">Nombre</th>
@@ -27,7 +27,7 @@
         </thead>
         <tbody>
         {% for user in users %}
-            <tr class="text-center">
+            <tr class="text-center {{loop.index % 2 == 0 ? 'bg-gray-100' : ''}}">
                 <td class="checkbox-cell border-2 border-black py-2">
                     <input type="checkbox" class="checkbox" name="check" onClick="markCell(this, {{user.ind}})" />
                     <label for="check"></label>
@@ -37,10 +37,10 @@
                 <td class="border-2 border-black py-2">{{ user.email }}</td>
                 <td class="border-2 border-black py-2">{{ user.phone }}</td>
                 <td class="border-2 border-black py-2">{{ user.type }}</td>
-                <td class="border-2 border-black py-2">{{ user.status }}</td>
+                <td class="border-2 border-black py-2 dotted cursor-help">{{ user.status }}</td>
                 <td class="flex flex-row justify-center items-center py-2 border-b-2 border-black">
-                    <a class="inline"><img src="/edit.svg" class="img-edit w-[25px] h-[25px]" /></a>
-                    <a class="inline"><img src="/delete.svg" class="img-delete w-[25px] h-[25px]" /></a>
+                    <a class="inline"><img src="/edit.svg" class="img-edit w-[25px] h-[25px] cursor-pointer" /></a>
+                    <a class="inline"><img src="/delete.svg" class="img-delete w-[25px] h-[25px] cursor-pointer" /></a>
                 </td>
             </tr>
         {% endfor %}
