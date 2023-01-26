@@ -20,7 +20,7 @@ class DefaultController extends AbstractController
         }
         for ($i = 1; $i < 53; $i++){
             $users[] = [
-                'ind' => $i,
+                'id' => $i,
                 'name' => "name$i",
                 'email' => "email$i@gmail.com",
                 'phone' => 123456789,
