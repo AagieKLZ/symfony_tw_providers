@@ -4,10 +4,10 @@
 {% block body %}
 <div class="w-full h-56 bg-blue-500 absolute">
     <h1 class="text-white text-6xl font-bold p-8">Proveedores</h1>
-    <button id="adder" class="flex flex-row align-middle items-center bg-green-500 py-2 px-3 rounded-full border-[1px] border-black absolute bottom-2 right-2">
+    <a href="/new"><button id="adder" class="flex flex-row align-middle items-center bg-green-500 py-2 px-3 rounded-full border-[1px] border-black absolute bottom-2 right-2">
         <img src="/add.svg" class="w-[40px] h-[40px]" />
         Añadir Proveedor
-    </button>
+    </button></a>
 </div>
     <button class="delete-selected no-show bg-red-500 right-[5%] absolute top-60 px-3 py-2 rounded-full text-white ">Delete Selected</button>
     <div class="absolute top-72 w-full">
@@ -37,7 +37,7 @@
                 <td class="border-2 border-black py-2">{{ user.email }}</td>
                 <td class="border-2 border-black py-2">{{ user.phone }}</td>
                 <td class="border-2 border-black py-2">{{ user.type }}</td>
-                <td class="border-2 border-black py-2 dotted cursor-help">{{ user.status }}</td>
+                <td class="border-2 border-black py-2 dotted cursor-help"><div class="w-[10px] h-[10px] rounded-full {{ user.status ? "bg-green-500" : "bg-red-500" }} inline-block mr-2"></div>{{ user.status ? "Activo" : "Inactivo" }}</td>
                 <td class="flex flex-row justify-center items-center py-2 border-b-2 border-black">
                     <a class="inline"><img src="/edit.svg" class="img-edit w-[25px] h-[25px] cursor-pointer" /></a>
                     <a class="inline"><img src="/delete.svg" class="img-delete w-[25px] h-[25px] cursor-pointer" /></a>

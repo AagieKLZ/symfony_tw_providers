@@ -25,7 +25,7 @@ class DefaultController extends AbstractController
                 'email' => "email$i@gmail.com",
                 'phone' => 123456789,
                 'type' => "type$i",
-                'status' => "Activo"
+                'status' => $i % 2 == 0
             ];
         }
         $user_n = count($users);
