@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+{% block body %}
+<div class="w-full h-56 bg-blue-500 absolute">
+    <h1 class="text-white text-6xl font-bold p-8">Proveedores</h1>
+    <button id="adder" class="flex flex-row align-middle items-center bg-green-500 py-2 px-3 rounded-full border-[1px] border-black absolute bottom-2 right-2">
+        <img src="/add.svg" class="w-[40px] h-[40px]" />
+        Añadir Proveedor
+    </button>
+</div>
+    <button class="delete-selected no-show bg-red-500 right-[5%] absolute top-60 px-3 py-2 rounded-full text-white ">Delete Selected</button>
+    <div class="absolute top-72 w-full">
+    
+    <table class="table border-2 border-black mx-auto w-[90%] border-collapse">
+        <thead>
+            <tr class="bg-gray-100">
+                <th class="py-4 border-2 border-black"><input type="checkbox" id="checkall" class="checkbox" onClick="toggle(this)" /></th>
+                <th class="py-4 border-2 border-black">#</th>
+                <th class="py-4 border-2 border-black">Nombre</th>
+                <th class="py-4 border-2 border-black">Email</th>
+                <th class="py-4 border-2 border-black">Telefono</th>
+                <th class="py-4 border-2 border-black">Tipo</th>
+                <th class="py-4 border-2 border-black">Estado</th>
+                <th class="py-4 border-2 border-black"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr class="text-center">
+                <td class="checkbox-cell border-2 border-black py-2">
+                    <input type="checkbox" class="checkbox" name="check" onClick="markCell(this, {{user.ind}})" />
+                    <label for="check"></label>
+                </td>
+                <td class="border-2 border-black py-2">{{ user.ind }}</td>
+                <td class="border-2 border-black py-2">{{ user.name }}</td>
+                <td class="border-2 border-black py-2">{{ user.email }}</td>
+                <td class="border-2 border-black py-2">{{ user.phone }}</td>
+                <td class="border-2 border-black py-2">{{ user.type }}</td>
+                <td class="border-2 border-black py-2">{{ user.status }}</td>
+                <td class="flex flex-row justify-center items-center py-2 border-b-2 border-black">
+                    <a class="inline"><img src="/edit.svg" class="img-edit w-[25px] h-[25px]" /></a>
+                    <a class="inline"><img src="/delete.svg" class="img-delete w-[25px] h-[25px]" /></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagination w-fit mt-4 flex flex-row justify-between text-center border-px border-black mx-auto">
+        {% set pages = page_n|number_format %}
+        {% for i in 1..pages %}
+            <a class="page-btn" href="/?page={{ i }}"><div class="text-center border-[1px] text-lg border-black px-4 hover:bg-blue-400 hover:text-white {{i == page ? 'bg-blue-600 text-white' : 'bg-gray-200'}}">{{ i }}</div></a>
+        {% endfor %}
+    </div>
+    </div>
+    
+    <script>
+        let selected = []
+        function toggle(source){
+            const checkboxes = document.querySelectorAll("input[type='checkbox']")
+            for(let i = 0; i < checkboxes.length ; i++){
+                checkboxes[i].checked = source.checked;
+                const cell = checkboxes[i].parentElement
+                const row = cell.parentElement
+                if (source.checked){
+                    row.classList.add("active")
+                    document.querySelector(".delete-selected").classList.remove("no-show")
+                } else {
+                    row.classList.remove("active")
+                    document.querySelector(".delete-selected").classList.add("no-show")
+                }
+            }
+        }
+
+        function update_delete(){
+            const checkboxes = document.querySelectorAll("input[type='checkbox']")
+            let isChecked = false
+            for(let i = 0 ; i < checkboxes.length; i++){
+                if (checkboxes[i].checked){
+                    isChecked = true
+                    document.querySelector(".delete-selected").classList.remove("no-show")
+                    break
+                }
+            if (!isChecked){
+                document.querySelector(".delete-selected").classList.add("no-show")
+            }
+            }
+        }
+
+        function markCell(ev, ind){
+            const row = ev.parentElement.parentElement
+            row.classList.toggle("active")
+             if (ev.checked){
+                selected.push(ind)
+            } else {
+                selected = selected.filter((item) => item !== ind)
+            }
+            update_delete()
+        }
+    </script>
+
+{% endblock %}
