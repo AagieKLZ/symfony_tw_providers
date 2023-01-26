@@ -4,7 +4,7 @@
 {% block body %}
 <div class="w-full h-56 bg-blue-500 absolute">
     <h1 class="text-white text-6xl font-bold p-8">Proveedores</h1>
-    <a href="/new"><button id="adder" class="flex flex-row align-middle items-center bg-green-500 py-2 px-3 rounded-full border-[1px] border-black absolute bottom-2 right-2">
+    <a href="/new"><button id="adder" class="flex flex-row align-middle items-center bg-green-500 py-2 px-3 rounded-full border-[1px] border-black absolute bottom-2 left-8">
         <img src="/add.svg" class="w-[40px] h-[40px]" />
         Añadir Proveedor
     </button></a>
@@ -35,9 +35,9 @@
                 <td class="border-2 border-black py-2">{{ user.id }}</td>
                 <td class="border-2 border-black py-2">{{ user.name }}</td>
                 <td class="border-2 border-black py-2">{{ user.email }}</td>
-                <td class="border-2 border-black py-2">{{ user.phone }}</td>
-                <td class="border-2 border-black py-2">{{ user.type }}</td>
-                <td class="border-2 border-black py-2 dotted cursor-help"><div class="w-[10px] h-[10px] rounded-full {{ user.status ? "bg-green-500" : "bg-red-500" }} inline-block mr-2"></div>{{ user.status ? "Activo" : "Inactivo" }}</td>
+                <td class="border-2 border-black py-2">{{ user.tlf }}</td>
+                <td class="border-2 border-black py-2">{{ user.cat }}</td>
+                <td class="border-2 border-black py-2 dotted cursor-help"><div class="w-[10px] h-[10px] rounded-full {{ user.is_active ? "bg-green-500" : "bg-red-500" }} inline-block mr-2"></div>{{ user.is_active ? "Activo" : "Inactivo" }}</td>
                 <td class="flex flex-row h-fit justify-center py-2 items-center border-b-2 border-black">
                     <a href="/edit?id={{user.id}}"><img src="/edit.svg" class="img-edit w-[25px] h-[25px] cursor-pointer" /></a>
                     <a><img src="/delete.svg" class="img-delete w-[25px] h-[25px] cursor-pointer" /></a>

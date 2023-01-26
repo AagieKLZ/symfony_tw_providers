@@ -18,16 +18,20 @@
     {{ form_widget(form.email) }}
     {{ form_label(form.tlf) }}
     {{ form_widget(form.tlf) }}
-    {{ form_label(form.type)}}
-    {{ form_widget(form.type)}}
+    {{ form_label(form.cat)}}
+    {{ form_widget(form.cat)}}
     <div class="flex flex-row mt-4 items-center">
     {{form_widget(form.active, {'attr' : {'id' : 'active-checkbox'}})}}
     {{ form_label(form.active, 'Active', {'label_attr' : {'for' : 'active-checkbox'}})}}
     </div>
-    {# {{ form_row (form.active, {'attr' : {'class' : 'mt-2'}})}} #}
     </fieldset>
     {{ form_widget(form.submit, {'attr' : {'class' : "bg-blue-500 text-white px-3 py-2 rounded"}}) }}
 {{ form_end(form) }}
 </div>
+{% if not form.vars.valid %}
+<div>
+    {{form_errors(form)}}
+</div>
+{% endif %}
 </div>
 {% endblock %}
