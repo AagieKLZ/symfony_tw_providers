@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class EditorController extends AbstractController
 {
-    /**
+    /*
      * @Route('/edit', name='edit_entry')
      */
     public function editEntry(Request $request)
@@ -40,7 +40,7 @@ class EditorController extends AbstractController
                     ->add('email', EmailType::class, ['label' => 'Correo Electrónico', 'data' => $user['email']])
                     ->add('tlf', TelType::class, ['label' => 'Teléfono', 'data' => $user['phone']])
                     ->add('type', ChoiceType::class, ['choices' => ['Hotel' => 'Hotel', 'Pista' => 'Pista', 'Complemento' => 'Complemento'], 'label' => 'Categoría', 'data' => $user["type"]])
-                    ->add('active', CheckboxType::class, ['label' => 'Proveedor activo', 'data' => $user["status"]])
+                    ->add('active', CheckboxType::class, ['label' => 'Proveedor activo', 'data' => $user["status"], 'required' => false])
                     ->add('submit', SubmitType::class, ['label' => 'Añadir'])
                     ->getForm();
                 $form->handleRequest($request);
