@@ -33,14 +33,14 @@ class EditorController extends AbstractController
                     ->add('tlf', TelType::class, ['label' => 'Teléfono', 'data' => $user['tlf']])
                     ->add('cat', ChoiceType::class, ['choices' => ['Hotel' => 'Hotel', 'Pista' => 'Pista', 'Complemento' => 'Complemento'], 'label' => 'Categoría', 'data' => $user["cat"]])
                     ->add('active', CheckboxType::class, ['label' => 'Proveedor activo', 'data' => $user["is_active"] == 1, 'required' => false])
-                    ->add('submit', SubmitType::class, ['label' => 'Añadir'])
+                    ->add('submit', SubmitType::class, ['label' => 'Guardar'])
                     ->getForm();
                 $form->handleRequest($request);
                 if ($form->isSubmitted() && $form->isValid()) {
                     // do something with the data
                     $data = $form->getData();
                     $db->updateEntry($id, $data);
-                    return $this->redirectToRoute('homepage');
+                    return $this->redirect('/?action=create&success=true');
                 }
                 return $this->render('default/edit.html.twig', ['id' => $id, 'user' => $user, 'form' => $form->createView()]);
             }

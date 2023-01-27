@@ -19,17 +19,31 @@ class DefaultController extends AbstractController
             $page = 1;
         }
 
-        $db = new \DatabaseConnection();
-        $users = $db->getEntries($page);
+        try {
+            $db = new \DatabaseConnection();
+            $users = $db->getEntries($page);
+            $page_n = $db->getPages();
+        } catch (\Throwable $th) {
+            return $this->render('default/db_error.html.twig');
+        }
+        
         $user_n = count($users);
-        $page_n = $db->getPages();
-
+        
+        if (isset($_GET['action']) && isset($_GET['success'])){
+            $action = $_GET['action'];
+            $success = $_GET['success'];
+        } else{
+            $action = "None";
+            $success = False;
+        }
         return $this->render('default/index.html.twig', 
         [
             'users' => $users, 
             'user_n' => $user_n, 
             'page' => $page,
-            'page_n' => $page_n
+            'page_n' => $page_n,
+            'action' => $action,
+            'success' => $success
         ]
     );
     }

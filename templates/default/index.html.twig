@@ -4,18 +4,17 @@
 {% block body %}
 <div class="w-full h-56 bg-blue-500 absolute">
     <h1 class="text-white text-6xl font-bold p-8">Proveedores</h1>
-    <a href="/new"><button id="adder" class="flex flex-row align-middle items-center bg-green-500 py-2 px-3 rounded-full border-[1px] border-black absolute bottom-2 left-8">
+    <a href="/new"class="flex flex-row align-middle shadow-xl drop-shadow-xl hover:scale-105 active:scale-95 items-center bg-green-500 py-2 px-3 rounded-full border-2 border-black absolute bottom-2 left-8">
         <img src="/add.svg" class="w-[40px] h-[40px]" />
         Añadir Proveedor
-    </button></a>
+    </a>
+    
 </div>
-    <button class="delete-selected no-show bg-red-500 right-[5%] absolute top-60 px-3 py-2 rounded-full text-white ">Delete Selected</button>
     <div class="absolute top-72 w-full">
     
     <table class="table border-2 border-black mx-auto w-[90%] border-collapse">
         <thead>
             <tr class="bg-blue-700 text-white">
-                <th class="py-4 border-2 border-black"><input type="checkbox" id="checkall" class="checkbox" onClick="toggle(this)" /></th>
                 <th class="py-4 border-2 border-black">#</th>
                 <th class="py-4 border-2 border-black">Nombre</th>
                 <th class="py-4 border-2 border-black">Email</th>
@@ -28,10 +27,6 @@
         <tbody>
         {% for user in users %}
             <tr class="text-center {{loop.index % 2 == 0 ? 'bg-gray-100' : ''}}">
-                <td class="checkbox-cell border-2 border-black py-2">
-                    <input type="checkbox" class="checkbox" name="check" onClick="markCell(this, {{user.id}})" />
-                    <label for="check"></label>
-                </td>
                 <td class="border-2 border-black py-2">{{ user.id }}</td>
                 <td class="border-2 border-black py-2">{{ user.name }}</td>
                 <td class="border-2 border-black py-2">{{ user.email }}</td>
@@ -40,7 +35,7 @@
                 <td class="border-2 border-black py-2 dotted cursor-help"><div class="w-[10px] h-[10px] rounded-full {{ user.is_active ? "bg-green-500" : "bg-red-500" }} inline-block mr-2"></div>{{ user.is_active ? "Activo" : "Inactivo" }}</td>
                 <td class="flex flex-row h-fit justify-center py-2 items-center border-b-2 border-black">
                     <a href="/edit?id={{user.id}}"><img src="/edit.svg" class="img-edit w-[25px] h-[25px] cursor-pointer" /></a>
-                    <a><img src="/delete.svg" class="img-delete w-[25px] h-[25px] cursor-pointer" /></a>
+                    <a href="/delete?id={{user.id}}"><img src="/delete.svg" class="img-delete w-[25px] h-[25px] cursor-pointer" /></a>
                 </td>
             </tr>
         {% endfor %}
@@ -48,55 +43,18 @@
     </table>
     <div class="pagination w-fit mt-4 flex flex-row justify-between text-center border-px border-black mx-auto">
         {% set pages = page_n|number_format %}
+        {% if pages > 0 %}
         {% for i in 1..pages %}
             <a class="page-btn" href="/?page={{ i }}"><div class="text-center border-[1px] text-lg border-black px-4 hover:bg-blue-400 hover:text-white {{i == page ? 'bg-blue-600 text-white' : 'bg-gray-200'}}">{{ i }}</div></a>
         {% endfor %}
-    </div>
+        {% else %}
+            <a class="page-btn" href="/?page=1"><div class="text-center border-[1px] text-lg border-black px-4 hover:bg-blue-400 hover:text-white bg-blue-600 text-white">1</div></a>
+        {% endif %}
     </div>
     
-    <script>
-        let selected = []
-        function toggle(source){
-            const checkboxes = document.querySelectorAll("input[type='checkbox']")
-            for(let i = 0; i < checkboxes.length ; i++){
-                checkboxes[i].checked = source.checked;
-                const cell = checkboxes[i].parentElement
-                const row = cell.parentElement
-                if (source.checked){
-                    row.classList.add("active")
-                    document.querySelector(".delete-selected").classList.remove("no-show")
-                } else {
-                    row.classList.remove("active")
-                    document.querySelector(".delete-selected").classList.add("no-show")
-                }
-            }
-        }
-
-        function update_delete(){
-            const checkboxes = document.querySelectorAll("input[type='checkbox']")
-            let isChecked = false
-            for(let i = 0 ; i < checkboxes.length; i++){
-                if (checkboxes[i].checked){
-                    isChecked = true
-                    document.querySelector(".delete-selected").classList.remove("no-show")
-                    break
-                }
-            if (!isChecked){
-                document.querySelector(".delete-selected").classList.add("no-show")
-            }
-            }
-        }
-
-        function markCell(ev, ind){
-            const row = ev.parentElement.parentElement
-            row.classList.toggle("active")
-             if (ev.checked){
-                selected.push(ind)
-            } else {
-                selected = selected.filter((item) => item !== ind)
-            }
-            update_delete()
-        }
-    </script>
+    </div>
+    {% if action != "None" and success %}
+        <div id="success" class="absolute text-center w-1/4 left-4 bottom-4 h-auto px-4 py-2 rounded-full bg-green-400">{{ action == "create" ? 'Entrada creada correctamente' : action == "edit" ? 'Entrada modificada correctamente' : 'Entrada eliminada correctamente' }}</div>
+    {% endif %}
 
 {% endblock %}

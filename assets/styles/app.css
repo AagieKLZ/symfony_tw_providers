@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.no-show{
-    display: none;
-}
 
 tr.active:nth-child(2n) > td{
     background-color: pink;
@@ -20,3 +17,23 @@ tr.active:nth-child(2n+1) > td{
     text-decoration-color: black;
     text-underline-offset: 4px;
 }
+
+#success{
+    animation: slide-in-out 5s forwards;
+}
+
+
+@keyframes slide-in-out {
+    0% {
+      transform: translateX(-125%);
+    }
+    25% {
+      transform: translateX(0%);
+    }
+    75% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-125%);
+    }
+  }

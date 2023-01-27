@@ -4,7 +4,10 @@
 {% block body %}
 <div class="w-full h-56 bg-blue-500 absolute">
     <h1 class="text-white text-6xl font-bold p-8">Nuevo Proveedor</h1>
-    <a href="/" class="block px-3 py-2 w-fit bg-green-500 text-black border-2 border-black absolute left-8 bottom-2 rounded-full">Volver</a>
+    <a href="/" class="block px-3 py-2 w-fit bg-yellow-400 shadow-xl drop-shadow-xl hover:scale-105 active:scale-95 text-black border-2 border-black absolute left-8 bottom-2 rounded-full flex flex-row">
+        <img src="/back.svg" alt="back" class="w-[25px] h-[25px]">
+        Volver
+    </a>
 </div>
 
 <div class="absolute top-64 w-full">
@@ -25,7 +28,7 @@
     {{ form_label(form.active, 'Active', {'label_attr' : {'for' : 'active-checkbox'}})}}
     </div>
     </fieldset>
-    {{ form_widget(form.submit, {'attr' : {'class' : "bg-blue-500 text-white px-3 py-2 rounded"}}) }}
+    {{ form_widget(form.submit, {'attr' : {'class' : "bg-blue-500 text-white px-5 py-2 rounded-full hover:scale-105 active:scale-95 drop-shadow-xl"}}) }}
 {{ form_end(form) }}
 </div>
 {% if not form.vars.valid %}

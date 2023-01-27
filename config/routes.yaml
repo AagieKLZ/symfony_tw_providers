@@ -7,5 +7,6 @@ edit:
 new:
     path: /new
     controller: App\Controller\NewEntryController::createNewForm
-
-    
+delete:
+    path: /delete
+    controller: App\Controller\DeleteController::deleteEntry
