@@ -2,13 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-
-tr.active:nth-child(2n) > td{
-    background-color: pink;
+body {
+  scrollbar-gutter: stable both-edges;
+  width: calc(100vw - 34px);
 }
 
-tr.active:nth-child(2n+1) > td{
-    background-color: rgb(248, 206, 213);
+body::-webkit-scrollbar{
+  display: none;
 }
 
 .dotted{
@@ -21,7 +21,6 @@ tr.active:nth-child(2n+1) > td{
 #success{
     animation: slide-in-out 5s forwards;
 }
-
 
 @keyframes slide-in-out {
     0% {

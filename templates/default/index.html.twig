@@ -10,7 +10,7 @@
     </a>
     
 </div>
-    <div class="absolute top-72 w-full">
+    <div class="absolute top-64 w-full sm:ml-0 mr-2 h-fit">
     
     <table class="table border-2 border-black mx-auto w-[90%] border-collapse">
         <thead>
@@ -28,7 +28,7 @@
         </thead>
         <tbody>
         {% for user in users %}
-            <tr class="text-center {{loop.index % 2 == 0 ? 'bg-gray-100' : ''}}">
+            <tr class="text-center hover:bg-blue-100 {{loop.index % 2 == 0 ? 'bg-gray-100' : 'bg-gray-200'}}">
                 <td class="border-2 border-black py-2">{{ user.id }}</td>
                 <td class="border-2 border-black py-2">{{ user.name }}</td>
                 <td class="border-2 border-black py-2">{{ user.email }}</td>
@@ -37,7 +37,7 @@
                 <td class="border-2 border-black py-2 sm:cursor-help md:table-cell hidden">
                     <div class="w-[10px] h-[10px] rounded-full {{ user.is_active ? "bg-green-500" : "bg-red-500" }} inline-block sm:mr-2 mx-auto active"></div>
                     <span class="dotted active sm:inline hidden">{{ user.is_active ? "Activo" : "Inactivo" }}</span>
-                    <div class="absolute w-84 px-2 py-4 max-h-28 min-h-fit h-20 mt-4 border-[1px] border-black h-4 info hidden text-center mx-auto z-30 bg-white backdrop-blur bg-opacity-50">
+                    <div class="absolute w-84 px-2 py-4 max-h-28 min-h-fit h-20 mt-4 border-[1px] border-black info hidden text-center mx-auto z-30 bg-white backdrop-blur bg-opacity-50">
                         <span><b>Modificado:</b> {{ user.last_modified }}</span><br>
                         <span><b>Creado en:</b> {{ user.created_at }}</span>
                     </div>
@@ -48,7 +48,7 @@
                 </td>
                 <td class="border-2 border-black py-2 border-l-0 md:table-cell hidden"><a href="/delete?id={{user.id}}"><img src="/delete.svg" class="img-delete w-[25px] h-[25px] mx-auto cursor-pointer" /></a></td>
                 <td class="border-2 border-black py-2 md:hidden table-cell"><img src="/ellipsis.svg" alt="more" class="w-[30px] h-[30px] mx-auto">
-                    <div class="sminfo block absolute hidden sm:hidden right-12 bg-white bg-opacity-50 backdrop-blur border-[1px] border-gray-500 p-2">
+                    <div class="sminfo absolute hidden sm:hidden right-16 -mt-24 bg-white bg-opacity-50 backdrop-blur border-[1px] border-gray-500 p-2 mb-12">
                         <ul>
                             <li><div class="w-[10px] h-[10px] rounded-full {{ user.is_active ? "bg-green-500" : "bg-red-500" }} inline-block sm:mr-2 mx-auto active"></div>
                     <span class="dotted active">{{ user.is_active ? "Activo" : "Inactivo" }}</span></li>
