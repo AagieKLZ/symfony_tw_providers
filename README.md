@@ -1,4 +1,35 @@
-# Symfony Providers App
+[ES](#Aplicación-de-control-de-proveedores-con-PHP-Symfony) | [EN](#PHP-Symfony-Providers-App)
+# Aplicación de control de proveedores con PHP Symfony
+
+Aplicación desarrollada con PHP Symfony 4 y Tailwind CSS
+
+Permite:
+- Conectarse a una base de datos MYSQL
+- Obtener información de los proveedores introducidos
+- Añadir, editar o eliminar proveedores
+- Comprobar fecha y hora de creación y de última modificación
+- Tabla responsive - Pasa el ratón sobre los elementos marcados para obtener más información
+- Resultados paginados
+
+### Docker
+
+La aplicación puede desplegarse utilizando docker mediante el comando
+```
+docker-compose up
+```
+La configuración de docker incluye la base de datos de MySQL preparada para funcionar junto a la aplicación.
+
+### Si pudiera hacerlo de nuevo...
+
+La estructura de la aplicación es sin duda una de las cosas a mejorar, al no haber visto anteriormente proyectos en producción en Symfony. Al no tener tanta experiencia con Twig, aprendí algo más tarde sobre temas como los layouts y components que definitivamente habrían facilitado la experiencia de desarrollo. Esto se aplica también a otros ficheros como controladores y conexiones, que también podrían ser mejorados mediante la implicación del ORM Doctrine (que no pude utilizar en este caso por un error que no fui capaz de solucionar en su momento, por lo que acabé utilizando la extensión de PHP mysqli en su lugar).
+
+A su vez, aprendí mucho durante el desarrollo de algunas features de Symfony como los formularios, que facilitan mucho la interacción con los datos. Otras funcionalidades que se podrían añadir con algo más de tiempo serían la capacidad de seleccionar y eliminar varias entradas a la vez en la lista de proveedores o la capacidad de iniciar sesión y añadir comprobaciones para evitar que cualquiera pueda eliminar elementos sin más ocnfirmación
+
+En general, he disfrutado mucho la experiencia de desarrollo con Symfony y Twig y acabaré desarrollando más proyectos a nivel personal para poder implementar algunas de las características principales de Symfony, así como añadir algunas otras como el uso de React o Vue en el frontend.
+
+---
+
+# PHP Symfony Providers App
 
 App developed using PHP Symfony 4 Framework and Tailwind CSS
 
