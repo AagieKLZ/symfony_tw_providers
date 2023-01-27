@@ -19,13 +19,13 @@ class DefaultController extends AbstractController
             $page = 1;
         }
 
-        // try {
+        try {
         $db = new \DatabaseConnection();
         $users = $db->getEntries($page);
         $page_n = $db->getPages();
-        // } catch (\Throwable $th) {
-        //     return $this->render('default/db_error.html.twig');
-        // } TODO: Fix this after
+        } catch (\Throwable $th) {
+            return $this->render('default/db_error.html.twig');
+        }
         
         $user_n = count($users);
         
