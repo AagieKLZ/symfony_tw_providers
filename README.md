@@ -14,7 +14,9 @@ Permite:
 ### Docker
 
 La aplicación puede desplegarse utilizando docker mediante el comando
-```
+```shell
+git clone https://github.com/AagieKLZ/symfony_tw_providers
+cd symfony_tw_providers
 docker-compose up
 ```
 La configuración de docker incluye la base de datos de MySQL preparada para funcionar junto a la aplicación.
@@ -48,7 +50,9 @@ Allows for:
 
 App can be deployed using **Docker** via
 
-```
+```shell
+git clone https://github.com/AagieKLZ/symfony_tw_providers
+cd symfony_tw_providers
 docker-compose up
 ```
 
