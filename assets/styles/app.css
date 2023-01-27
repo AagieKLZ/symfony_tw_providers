@@ -38,6 +38,14 @@ tr.active:nth-child(2n+1) > td{
     }
   }
 
-.active:hover + .info{
-  display: block;
+@media (min-width: 800px) {
+  .active:hover + .info{
+    display: block;
+  }
+}
+
+@media (max-width: 800px){
+  td>img:hover + .sminfo, .sminfo:hover{
+    display:block;
+  }
 }

@@ -18,11 +18,12 @@
                 <th class="py-4 border-2 border-black">#</th>
                 <th class="py-4 border-2 border-black">Nombre</th>
                 <th class="py-4 border-2 border-black">Email</th>
-                <th class="py-4 border-2 border-black">Telefono</th>
-                <th class="py-4 border-2 border-black">Tipo</th>
-                <th class="py-4 border-2 border-black">Estado</th>
-                <th class="py-4 border-2 border-black border-r-0"></th>
-                <th class="py-4 border-2 border-black border-l-0"></th>
+                <th class="py-4 border-2 border-black md:table-cell hidden">Telefono</th>
+                <th class="py-4 border-2 border-black md:table-cell hidden">Tipo</th>
+                <th class="py-4 border-2 border-black md:table-cell hidden">Estado</th>
+                <th class="py-4 border-2 border-black border-r-0 md:table-cell hidden"></th>
+                <th class="py-4 border-2 border-black border-l-0 md:table-cell hidden"></th>
+                <th class="py-4 border-2 border-black md:hidden table-cell"></th>
             </tr>
         </thead>
         <tbody>
@@ -31,21 +32,39 @@
                 <td class="border-2 border-black py-2">{{ user.id }}</td>
                 <td class="border-2 border-black py-2">{{ user.name }}</td>
                 <td class="border-2 border-black py-2">{{ user.email }}</td>
-                <td class="border-2 border-black py-2">{{ user.tlf }}</td>
-                <td class="border-2 border-black py-2">{{ user.cat }}</td>
-                <td class="border-2 border-black py-2 cursor-help">
-                    <div class="w-[10px] h-[10px] rounded-full {{ user.is_active ? "bg-green-500" : "bg-red-500" }} inline-block mr-2 active"></div>
-                    <span class="dotted active">{{ user.is_active ? "Activo" : "Inactivo" }}</span>
-                    <div class="absolute w-84 px-2 py-4 max-h-28 h-fit mt-4 border-[1px] border-black h-4 info hidden text-center mx-auto z-30 bg-white backdrop-blur bg-opacity-50">
+                <td class="border-2 border-black py-2 md:table-cell hidden">{{ user.tlf }}</td>
+                <td class="border-2 border-black py-2 md:table-cell hidden">{{ user.cat }}</td>
+                <td class="border-2 border-black py-2 sm:cursor-help md:table-cell hidden">
+                    <div class="w-[10px] h-[10px] rounded-full {{ user.is_active ? "bg-green-500" : "bg-red-500" }} inline-block sm:mr-2 mx-auto active"></div>
+                    <span class="dotted active sm:inline hidden">{{ user.is_active ? "Activo" : "Inactivo" }}</span>
+                    <div class="absolute w-84 px-2 py-4 max-h-28 min-h-fit h-20 mt-4 border-[1px] border-black h-4 info hidden text-center mx-auto z-30 bg-white backdrop-blur bg-opacity-50">
                         <span><b>Modificado:</b> {{ user.last_modified }}</span><br>
                         <span><b>Creado en:</b> {{ user.created_at }}</span>
                     </div>
                 </td>
-                <td class="flex-row justify-center py-2 items-center border-b-2 border-black">
+                <td class="flex-row justify-center py-2 items-center border-b-2 border-black md:table-cell hidden">
                     <a href="/edit?id={{user.id}}"><img src="/edit.svg" class="img-edit w-[25px] h-[25px] mx-auto cursor-pointer" /></a>
                     
                 </td>
-                <td class="border-2 border-black py-2 border-l-0"><a href="/delete?id={{user.id}}"><img src="/delete.svg" class="img-delete w-[25px] h-[25px] mx-auto cursor-pointer" /></a></td>
+                <td class="border-2 border-black py-2 border-l-0 md:table-cell hidden"><a href="/delete?id={{user.id}}"><img src="/delete.svg" class="img-delete w-[25px] h-[25px] mx-auto cursor-pointer" /></a></td>
+                <td class="border-2 border-black py-2 md:hidden table-cell"><img src="/ellipsis.svg" alt="more" class="w-[30px] h-[30px] mx-auto">
+                    <div class="sminfo block absolute hidden sm:hidden right-12 bg-white bg-opacity-50 backdrop-blur border-[1px] border-gray-500 p-2">
+                        <ul>
+                            <li><div class="w-[10px] h-[10px] rounded-full {{ user.is_active ? "bg-green-500" : "bg-red-500" }} inline-block sm:mr-2 mx-auto active"></div>
+                    <span class="dotted active">{{ user.is_active ? "Activo" : "Inactivo" }}</span></li>
+                            <li><b>Tlf:</b> {{user.tlf}}</li>
+                            <li><b>Tipo:</b> {{user.cat}}</li>
+                            <li><b>Modificado:</b> {{user.last_modified}}</li>
+                            <li><b>Creado:</b> {{ user.last_modified }}</li>
+                            <li>
+                                <div class="flex flex-row justify-center">
+                                    <a href="/edit?id={{user.id}}"><img src="/edit.svg" class="img-edit w-[25px] h-[25px] mx-auto cursor-pointer mr-4" /></a>
+                                    <a href="/delete?id={{user.id}}"><img src="/delete.svg" class="img-delete w-[25px] h-[25px] mx-auto cursor-pointer" /></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
             </tr>
         {% endfor %}
         </tbody>
@@ -63,7 +82,7 @@
     
     </div>
     {% if action != "None" and success %}
-        <div id="success" class="absolute text-center w-1/4 left-4 bottom-4 h-auto px-4 py-2 rounded-full bg-green-400">{{ action == "create" ? 'Entrada creada correctamente' : action == "edit" ? 'Entrada modificada correctamente' : 'Entrada eliminada correctamente' }}</div>
+        <div id="success" class="absolute text-center w-72 left-4 bottom-4 h-auto px-4 py-2 rounded-full bg-green-400">{{ action == "create" ? 'Entrada creada correctamente' : action == "edit" ? 'Entrada modificada correctamente' : 'Entrada eliminada correctamente' }}</div>
     {% endif %}
 
 {% endblock %}
