@@ -37,7 +37,6 @@ class NewEntryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $db->addEntry($data);
-            // return $this->redirectToRoute('homepage?action=create&success=true');
             return $this->redirect('/?action=create&success=true');
         }
 
