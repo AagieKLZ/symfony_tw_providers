@@ -20,9 +20,9 @@ class DefaultController extends AbstractController
         }
 
         try {
-            $db = new \DatabaseConnection();
-            $users = $db->getEntries($page);
-            $page_n = $db->getPages();
+        $db = new \DatabaseConnection();
+        $users = $db->getEntries($page);
+        $page_n = $db->getPages();
         } catch (\Throwable $th) {
             return $this->render('default/db_error.html.twig');
         }
