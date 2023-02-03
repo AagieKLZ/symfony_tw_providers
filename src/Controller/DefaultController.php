@@ -5,6 +5,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use \Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\EntryRepository;
+use Doctrine\Bundle\DoctrineBundle\Registry;
 
 class DefaultController extends AbstractController
 {
@@ -19,9 +20,9 @@ class DefaultController extends AbstractController
         } else{
             $page = 1;
         }
-
+        
         // try {
-        $managerRegistry = ...;
+        $managerRegistry = new Registry($container, [], ['default' => 'doctrine.orm.default_entity_manager'], 'default', 'default');
         $entryRepository = new EntryRepository($managerRegistry);
         $entityManager = new EntityManagerInterface();
         $db = new DatabaseConnection($entryRepository, $entityManager);
