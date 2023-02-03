@@ -20,7 +20,9 @@ class DefaultController extends AbstractController
         }
 
         // try {
-        $db = new \DatabaseConnection();
+        $entryRepository = new EntryRepository();
+        $entityManager = new EntityManagerInterface();
+        $db = new DatabaseConnection($entryRepository, $entityManager);
         $users = $db->getEntries($page);
         $page_n = $db->getPages();
         // } catch (\Throwable $th) {
