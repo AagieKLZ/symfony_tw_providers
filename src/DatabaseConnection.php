@@ -1,6 +1,6 @@
 <?php
 
-uuse App\Repository\EntryRepository;
+use App\Repository\EntryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class DatabaseConnection
