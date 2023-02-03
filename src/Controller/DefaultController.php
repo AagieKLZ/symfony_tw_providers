@@ -21,7 +21,8 @@ class DefaultController extends AbstractController
         }
 
         // try {
-        $entryRepository = new EntryRepository();
+        $managerRegistry = ...;
+        $entryRepository = new EntryRepository($managerRegistry);
         $entityManager = new EntityManagerInterface();
         $db = new DatabaseConnection($entryRepository, $entityManager);
         $users = $db->getEntries($page);
