@@ -22,6 +22,7 @@ class DefaultController extends AbstractController
         }
         
         // try {
+        $container = $this->getContainer();
         $managerRegistry = new Registry($container, [], ['default' => 'doctrine.orm.default_entity_manager'], 'default', 'default');
         $entryRepository = new EntryRepository($managerRegistry);
         $entityManager = new EntityManagerInterface();
