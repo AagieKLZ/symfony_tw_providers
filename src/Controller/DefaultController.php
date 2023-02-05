@@ -1,9 +1,9 @@
 <?php
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use \Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Entry;
 
 class DefaultController extends AbstractController
 {
@@ -18,14 +18,10 @@ class DefaultController extends AbstractController
         } else{
             $page = 1;
         }
-
-        try {
-        $db = new \DatabaseConnection();
-        $users = $db->getEntries($page);
-        $page_n = $db->getPages();
-        } catch (\Throwable $th) {
-            return $this->render('default/db_error.html.twig');
-        }
+        
+        $entityManager = $this->getDoctrine()->getManager();
+        $users = $entityManager->getRepository(Entry::class)->getEntries($page);
+        $page_n = $entityManager->getRepository(Entry::class)->getPages();
         
         $user_n = count($users);
         

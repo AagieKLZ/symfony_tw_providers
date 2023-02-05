@@ -1,7 +1,6 @@
 <?php
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use \Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -15,42 +14,30 @@ use App\Entity\Entry;
 
 class EditorController extends AbstractController
 {
-    /*
-     * @Route('/edit', name='edit_entry')
+    /**
+     * @Route("/edit/{id}", name="edit")
      */
-    public function editEntry(Request $request)
-    {
-        if (isset($_GET['id'])){
-            $id = $_GET['id'];
-            // $filtered = array_filter($users, [$this, 'filter_results']);
-            $db = new \DatabaseConnection();
-            $user = $db->getEntry($id);
-            $entry = new Entry();
+    public function editEntry(int $id, Request $request)
+    {  
+            $entityManager = $this->getDoctrine()->getManager();
+            $user = $entityManager->getRepository(Entry::class)->find($id);
             if ($user){
-                $form = $this->createFormBuilder($entry)
-                    ->add('name', TextType::class, ['label' => 'Nombre', 'data' => $user['name']])
-                    ->add('email', EmailType::class, ['label' => 'Correo Electrónico', 'data' => $user['email']])
-                    ->add('tlf', TelType::class, ['label' => 'Teléfono', 'data' => $user['tlf']])
-                    ->add('cat', ChoiceType::class, ['choices' => ['Hotel' => 'Hotel', 'Pista' => 'Pista', 'Complemento' => 'Complemento'], 'label' => 'Categoría', 'data' => $user["cat"]])
-                    ->add('active', CheckboxType::class, ['label' => 'Proveedor activo', 'data' => $user["is_active"] == 1, 'required' => false])
+                $form = $this->createFormBuilder($user)
+                    ->add('name', TextType::class, ['label' => 'Nombre', 'data' => $user->getName()])
+                    ->add('email', EmailType::class, ['label' => 'Correo Electrónico', 'data' => $user->getEmail()])
+                    ->add('tlf', TelType::class, ['label' => 'Teléfono', 'data' => $user->getTlf()])
+                    ->add('cat', ChoiceType::class, ['choices' => ['Hotel' => 'Hotel', 'Pista' => 'Pista', 'Complemento' => 'Complemento'], 'label' => 'Categoría', 'data' => $user->getCat()])
+                    ->add('isActive', CheckboxType::class, ['label' => 'Proveedor activo', 'data' => $user->getIsActive() == 1, 'required' => false])
                     ->add('submit', SubmitType::class, ['label' => 'Guardar'])
                     ->getForm();
                 $form->handleRequest($request);
                 if ($form->isSubmitted() && $form->isValid()) {
-                    // do something with the data
-                    $data = $form->getData();
-                    $db->updateEntry($id, $data);
+                    $user->setLastModified(new \DateTime());
+                    $entityManager->getRepository(Entry::class)->updateEntry($user);
                     return $this->redirect('/?action=create&success=true');
                 }
                 return $this->render('default/edit.html.twig', ['id' => $id, 'user' => $user, 'form' => $form->createView()]);
             }
-            return $this->render('default/edit_error.html.twig');     
-            
-        }
-        $id = 1;
-        return $this->render('default/edit_error.html.twig'); 
-    }
-    public function filter_results($var){
-        return ($var['id'] == $_GET['id']);
+            return $this->render('default/edit_error.html.twig');        
     }
 }

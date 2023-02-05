@@ -27,11 +27,11 @@
     {{ form_label(form.cat)}}
     {{ form_widget(form.cat)}}
     <div class="flex flex-row mt-4 items-center">
-    {{form_widget(form.active, {'attr' : {'id' : 'active-checkbox'}})}}
-    {{ form_label(form.active, 'Proveedor activo', {'label_attr' : {'for' : 'active-checkbox'}})}}
+    {{form_widget(form.isActive, {'attr' : {'id' : 'active-checkbox'}})}}
+    {{ form_label(form.isActive, 'Proveedor activo', {'label_attr' : {'for' : 'active-checkbox'}})}}
     </div>
     </fieldset>
-    {{ form_widget(form.submit, {'attr' : {'class' : "bg-blue-500 text-white px-5 py-2 rounded-full hover:scale-105 active:scale-95 drop-shadow-xl"}}) }}
+    {{ form_widget(form.submit, {'attr' : {'class' : "bg-blue-500 text-white px-5 py-2 mb-8 rounded-full hover:scale-105 active:scale-95 drop-shadow-xl"}}) }}
 {{ form_end(form) }}
 </div>
 </div>
