@@ -73,7 +73,7 @@
         {% set pages = page_n|number_format %}
         {% if pages > 0 %}
         {% for i in 1..pages %}
-            <a class="page-btn" href="/?page={{ i }}"><div class="text-center border-[1px] text-lg border-black px-4 hover:bg-blue-400 hover:text-white {{i == page ? 'bg-blue-600 text-white' : 'bg-gray-200'}}">{{ i }}</div></a>
+            <a class="page-btn" href="/?page={{ i }}"><div class="text-center border-[1px] text-lg border-black px-4 mb-8 hover:bg-blue-400 hover:text-white {{i == page ? 'bg-blue-600 text-white' : 'bg-gray-200'}}">{{ i }}</div></a>
         {% endfor %}
         {% else %}
             <a class="page-btn" href="/?page=1"><div class="text-center border-[1px] text-lg border-black px-4 hover:bg-blue-400 hover:text-white bg-blue-600 text-white">1</div></a>
