@@ -43,10 +43,10 @@
                     </div>
                 </td>
                 <td class="flex-row justify-center py-2 items-center border-b-2 border-black md:table-cell hidden">
-                    <a href="/edit?id={{user.id}}"><img src="/edit.svg" class="img-edit w-[25px] h-[25px] mx-auto cursor-pointer" /></a>
+                    <a href="/edit/{{user.id}}"><img src="/edit.svg" class="img-edit w-[25px] h-[25px] mx-auto cursor-pointer" /></a>
                     
                 </td>
-                <td class="border-2 border-black py-2 border-l-0 md:table-cell hidden"><a href="/delete?id={{user.id}}"><img src="/delete.svg" class="img-delete w-[25px] h-[25px] mx-auto cursor-pointer" /></a></td>
+                <td class="border-2 border-black py-2 border-l-0 md:table-cell hidden"><a href="/delete/{{user.id}}"><img src="/delete.svg" class="img-delete w-[25px] h-[25px] mx-auto cursor-pointer" /></a></td>
                 <td class="border-2 border-black py-2 md:hidden table-cell"><img src="/ellipsis.svg" alt="more" class="w-[30px] h-[30px] mx-auto">
                     <div class="sminfo absolute hidden sm:hidden sm:right-20 right-16 -mt-24 bg-white bg-opacity-50 backdrop-blur border-[1px] border-gray-500 p-2 mb-12">
                         <ul>
@@ -58,8 +58,8 @@
                             <li><b>Creado:</b>{% if user.createdAt %} {{ user.createdAt.format('Y-m-d H:i:s') }}{% endif %}</li>
                             <li>
                                 <div class="flex flex-row justify-center">
-                                    <a href="/edit?id={{user.id}}"><img src="/edit.svg" class="img-edit w-[25px] h-[25px] mx-auto cursor-pointer mr-4" /></a>
-                                    <a href="/delete?id={{user.id}}"><img src="/delete.svg" class="img-delete w-[25px] h-[25px] mx-auto cursor-pointer" /></a>
+                                    <a href="/edit/{{user.id}}"><img src="/edit.svg" class="img-edit w-[25px] h-[25px] mx-auto cursor-pointer mr-4" /></a>
+                                    <a href="/delete/{{user.id}}"><img src="/delete.svg" class="img-delete w-[25px] h-[25px] mx-auto cursor-pointer" /></a>
                                 </div>
                             </li>
                         </ul>

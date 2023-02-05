@@ -35,15 +35,6 @@ class NewEntryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // $data = $form->getData();
-            // $entry->setIsActive($form->get('isActive')->getData());
-            // $entry->setCat($form->get('cat')->getData());
-            // $data->setLastModified(new \DateTime());
-            // $data->setCreatedAt(new \DateTime());
-            $entry->setLastModified(new \DateTime());
-            $entry->setCreatedAt(new \DateTime());
-            $entry->setIsActive($form->get('isActive')->getData());
-            $entry->setCat($form->get('cat')->getData());
             $entityManager->getRepository(Entry::class)->addEntry($entry);
             return $this->redirect('/?action=create&success=true');
         }

@@ -12,11 +12,14 @@ COPY . /app
 
 RUN composer install
 RUN npm install
+RUN php bin/console doctrine:database:create
+RUN php bin/console make:migration
+RUN php bin/console doctrine:migrations:migrate
+
 
 EXPOSE 8000
 COPY start.sh /start.sh
 
 RUN chmod +x /start.sh
-
 
 CMD ["/start.sh"]

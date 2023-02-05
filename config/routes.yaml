@@ -2,11 +2,11 @@ index:
     path: /
     controller: App\Controller\DefaultController::index
 edit:
-    path: /edit
+    path: /edit/{id}
     controller: App\Controller\EditorController::editEntry
 new:
     path: /new
     controller: App\Controller\NewEntryController::createNewForm
 delete:
-    path: /delete
+    path: /delete/{id}
     controller: App\Controller\DeleteController::deleteEntry

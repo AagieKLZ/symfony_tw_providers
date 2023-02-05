@@ -20,7 +20,4 @@ services:
       MYSQL_ROOT_PASSWORD: symfony123!
     ports:
       - "3306:3306"
-    command: --init-file /data/application/init.sql
-    volumes:
-      - ./init.sql:/data/application/init.sql
     

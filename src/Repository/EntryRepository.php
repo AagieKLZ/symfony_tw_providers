@@ -13,6 +13,8 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Entry[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  * @method            addEntry(Entry $data)
  * @method Integer    getPages()
+ * @method            updateEntry(Entry $data)
+ * @method            deleteEntry(Entry $data)
  */
 class EntryRepository extends ServiceEntityRepository
 {
@@ -52,6 +54,18 @@ class EntryRepository extends ServiceEntityRepository
     public function addEntry(Entry $data)
     {
         $this->_em->persist($data);
+        $this->_em->flush();
+    }
+
+    public function updateEntry(Entry $data)
+    {
+        $this->_em->persist($data);
+        $this->_em->flush();
+    }
+
+    public function deleteEntry(Entry $data)
+    {
+        $this->_em->remove($data);
         $this->_em->flush();
     }
 }
