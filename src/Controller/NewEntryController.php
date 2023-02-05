@@ -17,11 +17,7 @@ class NewEntryController extends AbstractController
     private $connection;
     public function createNewForm(Request $request)
     {
-        // try{
-            $entityManager = $this->getDoctrine()->getManager();
-        // } catch (\Throwable $th) {
-            // return $this->render('default/db_error.html.twig');
-        // }
+        $entityManager = $this->getDoctrine()->getManager();
         $entry = new Entry();
         $form = $this->createFormBuilder($entry)
             ->add('name', TextType::class, ['label' => 'Nombre', 'invalid_message' => 'El nombre debe tener más de 3 caracteres'])
