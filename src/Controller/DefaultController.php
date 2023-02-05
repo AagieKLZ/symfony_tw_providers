@@ -19,15 +19,9 @@ class DefaultController extends AbstractController
             $page = 1;
         }
         
-        // try {
         $entityManager = $this->getDoctrine()->getManager();
-
         $users = $entityManager->getRepository(Entry::class)->getEntries($page);
-        $page_n = $entityManager->getRepository(Entry::class)->getPages($page);
-
-        // } catch (\Throwable $th) {
-        //     return $this->render('default/db_error.html.twig');
-        // }
+        $page_n = $entityManager->getRepository(Entry::class)->getPages();
         
         $user_n = count($users);
         

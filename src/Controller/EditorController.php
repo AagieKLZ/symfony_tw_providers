@@ -18,7 +18,7 @@ class EditorController extends AbstractController
      * @Route("/edit/{id}", name="edit")
      */
     public function editEntry(int $id, Request $request)
-    {
+    {  
             $entityManager = $this->getDoctrine()->getManager();
             $user = $entityManager->getRepository(Entry::class)->find($id);
             if ($user){
@@ -32,6 +32,7 @@ class EditorController extends AbstractController
                     ->getForm();
                 $form->handleRequest($request);
                 if ($form->isSubmitted() && $form->isValid()) {
+                    $user->setLastModified(new \DateTime());
                     $entityManager->getRepository(Entry::class)->updateEntry($user);
                     return $this->redirect('/?action=create&success=true');
                 }

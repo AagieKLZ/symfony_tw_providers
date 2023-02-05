@@ -13,7 +13,6 @@ class DeleteController extends AbstractController
         */
         public function deleteEntry(int $id)
         {
-        // try {
             $entityManager = $this->getDoctrine()->getManager();
             $user = $entityManager->getRepository(Entry::class)->find($id);
             if ($user){
@@ -22,8 +21,5 @@ class DeleteController extends AbstractController
             } else{
                 return $this->render('default/edit_error.html.twig');
             }
-        // } catch (\Throwable $th) {
-        //     return $this->render('default/db_error.html.twig');
-        // }
     }
 }
