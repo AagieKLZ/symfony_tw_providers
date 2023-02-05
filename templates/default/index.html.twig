@@ -35,11 +35,11 @@
                 <td class="border-2 border-black py-2 md:table-cell hidden">{{ user.tlf }}</td>
                 <td class="border-2 border-black py-2 md:table-cell hidden">{{ user.cat }}</td>
                 <td class="border-2 border-black py-2 sm:cursor-help md:table-cell hidden">
-                    <div class="w-[10px] h-[10px] rounded-full {{ user.is_active ? "bg-green-500" : "bg-red-500" }} inline-block sm:mr-2 mx-auto active"></div>
-                    <span class="dotted active sm:inline hidden">{{ user.is_active ? "Activo" : "Inactivo" }}</span>
+                    <div class="w-[10px] h-[10px] rounded-full {{ user.isActive ? "bg-green-500" : "bg-red-500" }} inline-block sm:mr-2 mx-auto active"></div>
+                    <span class="dotted active sm:inline hidden">{{ user.isActive ? "Activo" : "Inactivo" }}</span>
                     <div class="absolute w-84 px-2 py-4 max-h-28 min-h-fit h-20 mt-4 border-[1px] border-black info hidden text-center mx-auto z-30 bg-white backdrop-blur bg-opacity-50">
-                        <span><b>Modificado:</b> {{ user.last_modified }}</span><br>
-                        <span><b>Creado en:</b> {{ user.created_at }}</span>
+                        <span><b>Modificado:</b>{% if user.lastModified %} {{ user.lastModified.format('Y-m-d H:i:s') }} {% endif %}</span><br>
+                        <span><b>Creado en:</b> {% if user.createdAt %}{{ user.createdAt.format('Y-m-d H:i:s') }}{% endif %}</span>
                     </div>
                 </td>
                 <td class="flex-row justify-center py-2 items-center border-b-2 border-black md:table-cell hidden">
@@ -50,12 +50,12 @@
                 <td class="border-2 border-black py-2 md:hidden table-cell"><img src="/ellipsis.svg" alt="more" class="w-[30px] h-[30px] mx-auto">
                     <div class="sminfo absolute hidden sm:hidden sm:right-20 right-16 -mt-24 bg-white bg-opacity-50 backdrop-blur border-[1px] border-gray-500 p-2 mb-12">
                         <ul>
-                            <li><div class="w-[10px] h-[10px] rounded-full {{ user.is_active ? "bg-green-500" : "bg-red-500" }} inline-block sm:mr-2 mx-auto active"></div>
-                    <span class="dotted active">{{ user.is_active ? "Activo" : "Inactivo" }}</span></li>
+                            <li><div class="w-[10px] h-[10px] rounded-full {{ user.isActive ? "bg-green-500" : "bg-red-500" }} inline-block sm:mr-2 mx-auto active"></div>
+                    <span class="dotted active">{{ user.isActive ? "Activo" : "Inactivo" }}</span></li>
                             <li><b>Tlf:</b> {{user.tlf}}</li>
                             <li><b>Tipo:</b> {{user.cat}}</li>
-                            <li><b>Modificado:</b> {{user.last_modified}}</li>
-                            <li><b>Creado:</b> {{ user.last_modified }}</li>
+                            <li><b>Modificado:</b> {% if user.lastModified %}{{user.lastModified.format('Y-m-d H:i:s')}}{% endif %}</li>
+                            <li><b>Creado:</b>{% if user.createdAt %} {{ user.createdAt.format('Y-m-d H:i:s') }}{% endif %}</li>
                             <li>
                                 <div class="flex flex-row justify-center">
                                     <a href="/edit?id={{user.id}}"><img src="/edit.svg" class="img-edit w-[25px] h-[25px] mx-auto cursor-pointer mr-4" /></a>

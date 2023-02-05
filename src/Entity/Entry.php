@@ -20,7 +20,7 @@ class Entry
      * @Assert\Length(min=3, max=100)
      * @Assert\Type("string")
      * 
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, name="name")
      */
     private $name;
     
@@ -43,39 +43,32 @@ class Entry
     private $tlf;
 
     /**
-     * @Assert\NotBlank
-     * @Assert\Length(min=3, max=100)
-     * 
-     * @ORM\Column(type="string", length=100)
-     */
-    private $cat;
-    /*
     * @Assert\NotBlank
     * @Assert\Choice({"Hotel", "Pista", "Complemento"})
 
-    * @ORM\Column(type="string", length=100)
+    * @ORM\Column(type="string", length=100, name="cat")
     */
-    private $active;
-
-    /* 
-    * @ORM\Column(type="datetime")
-    */
-    private $created_at;
+    private $cat;
 
     /**
-    * @ORM\Column(type="datetime")
+    * @ORM\Column(type="boolean", name="is_active")
     */
-    private $modified_at;
+    private $isActive;
+
+    /**
+    * @ORM\Column(type="datetime", name="created_at")
+    */
+    private $createdAt;
+
+    /**
+    * @ORM\Column(type="datetime", name="last_modified")
+    */
+    private $lastModified;
 
     public function __construct()
     {
-        $this->name = '';
-        $this->email = '';
-        $this->tlf = 0;
-        $this->cat = '';
-        $this->active = false;
-        $this->created_at = new \DateTime();
-        $this->modified_at = new \DateTime();
+        $this->createdAt = new \DateTime();
+        $this->lastModified = new \DateTime();
     }
 
     public function getId(): ?int
@@ -131,14 +124,14 @@ class Entry
         return $this;
     }
 
-    public function getActive(): ?bool
+    public function getIsActive(): ?bool
     {
-        return $this->active;
+        return $this->isActive;
     }
 
-    public function setActive(bool $active): self
+    public function setIsActive(bool $active): self
     {
-        $this->active = $active;
+        $this->isActive = $active;
 
         return $this;
     }
@@ -157,12 +150,12 @@ class Entry
 
     public function getLastModified(): ?\DateTimeInterface
     {
-        return $this->modified_at;
+        return $this->lastModified;
     }
 
     public function setLastModified(\DateTimeInterface $modified_at): self
     {
-        $this->modified_at = $modified_at;
+        $this->lastModified = $modified_at;
         return $this;
     }
 

@@ -4,13 +4,15 @@ namespace App\Repository;
 
 use App\Entity\Entry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Entry|null find($id, $lockMode = null, $lockVersion = null)
  * @method Entry|null findOneBy(array $criteria, array $orderBy = null)
  * @method Entry[]    findAll()
  * @method Entry[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method            addEntry(Entry $data)
+ * @method Integer    getPages()
  */
 class EntryRepository extends ServiceEntityRepository
 {
@@ -22,6 +24,7 @@ class EntryRepository extends ServiceEntityRepository
     public function getEntries($page)
     {
         return $this->createQueryBuilder('e')
+            ->select('e.id, e.name, e.email, e.tlf, e.cat, e.isActive, e.createdAt, e.lastModified')
             ->setMaxResults(10)
             ->setFirstResult(($page - 1) * 10)
             ->getQuery()
@@ -46,25 +49,9 @@ class EntryRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
-    public function addEntry(Entry $entry)
+    public function addEntry(Entry $data)
     {
-        $this->_em->persist($entry);
-        $this->_em->flush();
-    }
-
-    public function updateEntry($id, Entry $entry)
-    {
-        $entry->setId($id);
-        $this->_em->flush();
-    }
-
-    public function deleteEntry($id)
-    {
-        $entry = $this->getEntry($id);
-        if (!$entry) {
-            throw new Exception("No Entry with id $id found");
-        }
-        $this->_em->remove($entry);
+        $this->_em->persist($data);
         $this->_em->flush();
     }
 }
