@@ -20,4 +20,13 @@ services:
       MYSQL_ROOT_PASSWORD: symfony123!
     ports:
       - "3306:3306"
-    
+  symfonysetup:
+    build:
+      context: .
+    restart: "no"
+    volumes:
+      - .:/var/www/symfony
+    depends_on:
+      - db
+      - symfony
+    entrypoint: ["bash", "-c", "sleep 15 && php bin/console doctrine:migrations:migrate --no-interaction && php bin/console doctrine:database:create && php bin/console doctrine:migrations:migrate"]
